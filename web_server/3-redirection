@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Configure Nginx server so that /redirect_me is redirecting to another page.
+
+apt-get -y update
+apt-get -y install nginx
+echo "Holberton School" | sudo tee /usr/share/nginx/html/index.html
+sudo sed -i "30i $ADD301_REDIRECT" /etc/nginx/sites-available/default
+service nginx restart
