@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Customizing a 404-error_page
+# Configuring to HTTP header
 
 sudo apt-get update
 sudo apt-get install -y nginx
