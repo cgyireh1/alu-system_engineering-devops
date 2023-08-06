@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error page</title>
+</head>
+<body>
+    <h1>404</h1>
+    <p>Ceci n'est pas une page</p>
+</body>
+</html>
+
+sudo apt update
+sudo apt install nginx -y
+sudo touch /var/www/html/index.html
+sudo touch /var/www//html/pagenotfound.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/pagenotfound.html
+sudo vi /etc/nginx/sites-enabled/default
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+    server_name _;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location /redirect_me {
+        return 301 https://www.github.com/cgyireh1;
+    }
+
+    error_page 404 /pagenotfound.html;
+}
